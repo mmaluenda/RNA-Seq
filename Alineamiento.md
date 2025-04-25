@@ -39,6 +39,8 @@ Se necesitan inputs especiales para correr este código y la manera de lanzarlo 
 $  Rscript 05_SarTools.r   --projectName "APC_Astro_iso"   --author "rcelis"   --targetFile target.txt   --rawDir raw   --varInt group   --condRef APC   --typeTrans VST --forceCairoGraph
 ```
 donde ```05_SarTools.r``` es el script en R, ```target.txt``` corresponde a una tabla con los dos genes especificos que se van a comparar (este archivo tiene formato de label, group y files), ```raw``` el directorio donde se encuentra la data en formato *.counts.summary, ```group``` corresponde a los dos grupos al que pertenece cada gen (por ejemplo APC o Astrocitos), ```--condRef APC``` es el gen que toma de referencia, en este caso el grupo ```APC```. 
+
+Formato del archivo ```target.txt```
 ```bash
 label	group	files
 IPS_WT1	IPS	IPS_WT1.counts.summary
@@ -47,5 +49,23 @@ IPS_WT3	IPS	IPS_WT3.counts.summary
 NPC_WT1	NPC	NPC_WT1.counts.summary
 NPC_WT2	NPC	NPC_WT2.counts.summary
 NPC_Iso	NPC	NPC_Iso.counts.summary
+```
+
+Formato del archivo ```*.counts.summary``` ubicados en el directorio ```raw``` (son muy grandes).
+```bash
+ENSG00000284662	0
+ENSG00000186827	3
+ENSG00000186891	2
+ENSG00000160072	1625
+ENSG00000041988	590
+ENSG00000142611	439
+ENSG00000067606	277
+ENSG00000131584	2111
+ENSG00000169972	570
+ENSG00000157911	1227
+ENSG00000224051	778
+.
+.
+.
 ```
 
