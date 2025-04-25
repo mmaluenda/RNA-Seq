@@ -29,3 +29,23 @@ $  ./04_featurecounts.sh /home/proyectos/Protocolos/RNA-seq/outputs/03_star /hom
 La ultima opción (1 en el ejemplo) corresponde al parametro -s en las tareas de featureCounts y depende del protocolo de librería usado: 0 corresponde a no stranded, 1 corresponde a stranded (sentido original) y 2 reverso (común en librerías tipo dUTP o TruSeq), al elegir cada una de estas opciones (por separado) se crea su propio directorio: ```../outputs/04_featurecounts/opt_0```, ```../outputs/04_featurecounts/opt_1``` y ```../outputs/04_featurecounts/opt_2```. Los archivos creados en este proceso son: ```*.counts``` es la tabla de conteo por gen (para DESeq2, edgeR, etc.), ```*.counts.summary``` es el resumen de cuántos reads se asignaron, descartaron, etc. y finalmente ```*_sartools.counts ``` es una versión simplificada del archivo ```*.counts```, pensada para ser directamente leída por ```SARTools``` o scripts de R, y contiene una tabla simple: una fila por gen, una columna por muestra, Encabezado limpio, directamente usable en R.
 
 + 05 Sartools
+
+Este quinto paso corresponde al análisis de expresión diferencial usando el paquete ```SARTools``` en R, que funciona como una interfaz amigable para ```DESeq2``` o ```edgeR```, en nuestro caso lo usamos para ```DESeq2```.
+
+```SARTools``` (Statistical Analysis of RNA-seq data Tools) es un paquete en R que automatiza: Importar datos de featureCounts, normalizar la expresión, realizar análisis de expresión diferencial, y lo más importante generar informes ```HTML``` con gráficos y resultados.
+
+Se necesitan inputs especiales para correr este código y la manera de lanzarlo se especifica a continuación:
+```bash
+$  Rscript 05_SarTools.r   --projectName "APC_Astro_iso"   --author "rcelis"   --targetFile target.txt   --rawDir raw   --varInt group   --condRef APC   --typeTrans VST --forceCairoGraph
+```
+donde ```05_SarTools.r``` es el script en R, ```target.txt``` corresponde a una tabla con los dos genes especificos que se van a comparar (este archivo tiene formato de label, group y files), ```raw``` el directorio donde se encuentra la data en formato *.counts.summary, ```group``` corresponde a los dos grupos al que pertenece cada gen (por ejemplo APC o Astrocitos), ```--condRef APC``` es el gen que toma de referencia, en este caso el grupo ```APC```. 
+```bash
+label	group	files
+IPS_WT1	IPS	IPS_WT1.counts.summary
+IPS_WT2	IPS	IPS_WT2.counts.summary
+IPS_WT3	IPS	IPS_WT3.counts.summary
+NPC_WT1	NPC	NPC_WT1.counts.summary
+NPC_WT2	NPC	NPC_WT2.counts.summary
+NPC_Iso	NPC	NPC_Iso.counts.summary
+```
+
