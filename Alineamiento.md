@@ -22,6 +22,8 @@ El cuarto paso es la clave de RNA-Seq, la cuantificación. Aquí tomas los reads
 
 FeatureCounts toma tus lecturas alineadas y les asigna una etiqueta de gen, transcript o exón con base en una anotación de referencia. Básicamente, responde a la pregunta: ¿Cuántos reads caen sobre cada gen?
 
+Los inputs que toma ```featureCounts``` provienen del directorio ```../outputs/03_star```:
+
 ```bash
 $  ./04_featurecounts.sh /home/proyectos/Protocolos/RNA-seq/outputs/03_star /home/proyectos/Protocolos/RNA-seq/outputs/04_counts 1
 ```
@@ -34,7 +36,7 @@ Este quinto paso corresponde al análisis de expresión diferencial usando el pa
 
 ```SARTools``` (Statistical Analysis of RNA-seq data Tools) es un paquete en R que automatiza: Importar datos de featureCounts, normalizar la expresión, realizar análisis de expresión diferencial, y lo más importante generar informes ```HTML``` con gráficos y resultados.
 
-Se necesitan inputs especiales para correr este código y la manera de lanzarlo se especifica a continuación:
+Se necesitan inputs especiales para correr este código que se construyen a partir de los archivos ```*.counts``` y la manera de lanzarlo se especifica a continuación:
 ```bash
 $  Rscript 05_SarTools.r   --projectName "APC_Astro_iso"   --author "rcelis"   --targetFile target.txt   --rawDir raw   --varInt group   --condRef APC   --typeTrans VST --forceCairoGraph
 ```
@@ -68,4 +70,10 @@ ENSG00000224051	778
 .
 .
 ```
+Estos archivos ```*.counts.summary``` se generan a partir de los ```*.counts``` usando el comando: 
+
+```bash
+$ cat *.counts| cut -f1,7 > *.counts.summary
+```
+donde del archivo ```*.counts``` toma solo la columna 1 y la 7 (```cut -f1,7```) que es el nombre del gen y el numero de cuentas.
 
