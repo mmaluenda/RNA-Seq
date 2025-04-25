@@ -77,3 +77,15 @@ $ cat *.counts| cut -f1,7 > *.counts.summary
 ```
 donde del archivo ```*.counts``` toma solo la columna 1 y la 7 (```cut -f1,7```) que es el nombre del gen y el numero de cuentas.
 
+Importante: estos archivos ```*.counts.summary``` se deben crear para que SARTools genere un analisis de expresion diferencial con todas las cuentas de los genes de la muestra, si se utilizan los generedos por el paso anterior ```04_featurecounts/opt_*/*.counts.summary``` hará el analisis pero con archivos mucho más resumidos y queremos que tome todos los genes.
+
++ 05 TPM Normalization
+
+El paso ```05_TPM-normalizatio```n es paralelo a ```05_SARTools```, y cumple un objetivo complementario, pero distinto. Es ideal para comparar expresión absoluta entre genes o muestras, permite comparar entre genes, no hace test estadístico. TPM (Transcripts Per Million) es una forma de normalizar la expresión que corrige por la longitud del gen (genes más largos corresponden a más reads), corrige por la profundidad total de secuenciación y se expresa como "de cada millón de transcritos, cuántos vienen de este gen". 
+
+Para correrlo se necesitan solo los archivos del directorio de ```../outputs/04_counts/``` como entrada y su respectivo directorio de salida:
+```bash
+$ ./05_TPM-normalization.sh ../outputs/04_counts/ ../outputs/05_tpm
+```
+
+
