@@ -1,4 +1,4 @@
-# Guía para alineamiento 03, 04, 05, 06, 07
+# Guía para alineamiento 03, 04, 05, 06
 
 + Alineamiento 03 STAR  
 
@@ -87,5 +87,13 @@ Para correrlo se necesitan solo los archivos del directorio de ```../outputs/04_
 ```bash
 $ ./05_TPM-normalization.sh ../outputs/04_counts/ ../outputs/05_tpm
 ```
++ 06 annotgene
+
+El paso final ```annotgene``` después de ```SARTools```, tiene como propósito anotar biológicamente los resultados de expresión diferencial. Este paso toma la lista de genes diferencialmente expresados (DEGs) obtenidos en SARTools y les agrega información útil, como: Símbolo del gen (TP53, ACTB, etc.), Nombre descriptivo del gen, Biotipo (proteína codificante, pseudogén, lncRNA, etc.), Función molecular o GO terms (si se incluye) y ID externo (Ensembl, Entrez, RefSeq…) 
+```bash
+$ ./05_TPM-normalization.sh ../outputs/04_counts/ ../outputs/05_tpm
+```
+Salida típica ```*.annot.txt```, que mantiene las columnas estadísticas y agrega columnas de anotación
+
 
 
