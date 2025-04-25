@@ -38,9 +38,9 @@ Este quinto paso corresponde al análisis de expresión diferencial usando el pa
 
 Se necesitan inputs especiales para correr este código que se construyen a partir de los archivos ```*.counts``` y la manera de lanzarlo se especifica a continuación:
 ```bash
-$  Rscript 05_SarTools.r   --projectName "APC_Astro_iso"   --author "rcelis"   --targetFile target.txt   --rawDir raw   --varInt group   --condRef APC   --typeTrans VST --forceCairoGraph
+$  Rscript 05_SarTools.r   --projectName "IPS_NPC_iso"   --author "rcelis"   --targetFile target.txt   --rawDir raw   --varInt group   --condRef IPS   --typeTrans VST --forceCairoGraph
 ```
-donde ```05_SarTools.r``` es el script en R, ```target.txt``` corresponde a una tabla con los dos genes especificos que se van a comparar (este archivo tiene formato de label, group y files), ```raw``` el directorio donde se encuentra la data en formato *.counts.summary, ```group``` corresponde a los dos grupos al que pertenece cada gen (por ejemplo APC o Astrocitos), ```--condRef APC``` es el gen que toma de referencia, en este caso el grupo ```APC```. 
+donde ```05_SarTools.r``` es el script en R, ```target.txt``` corresponde a una tabla con los dos genes especificos que se van a comparar (este archivo tiene formato de label, group y files), ```raw``` el directorio donde se encuentra la data en formato *.counts.summary, ```group``` corresponde a los dos grupos al que pertenece cada gen (por ejemplo IPS o NPC), ```--condRef IPS``` es el gen que toma de referencia, en este caso el grupo ```IPS```. 
 
 Formato del archivo ```target.txt```
 ```bash
